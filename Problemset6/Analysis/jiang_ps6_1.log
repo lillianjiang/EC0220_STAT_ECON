@@ -1,0 +1,67 @@
+----------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6.
+> log
+  log type:  text
+ opened on:   1 Dec 2018, 21:32:29
+
+. scatter bac beers
+
+. regress bac beers
+
+      Source |       SS           df       MS      Number of obs   =        16
+-------------+----------------------------------   F(1, 14)        =     55.94
+       Model |  .023375345         1  .023375345   Prob > F        =    0.0000
+    Residual |  .005849655        14  .000417832   R-squared       =    0.7998
+-------------+----------------------------------   Adj R-squared   =    0.7855
+       Total |     .029225        15  .001948333   Root MSE        =    .02044
+
+------------------------------------------------------------------------------
+         bac |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       beers |   .0179638   .0024017     7.48   0.000     .0128126    .0231149
+       _cons |  -.0127006   .0126375    -1.00   0.332    -.0398053    .0144041
+------------------------------------------------------------------------------
+
+. twoway(scatter bac beers) (lfit bac beers)
+
+
+. gen limit = (bac > 0.08) 
+
+
+. sum limit
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       limit |         16       .4375    .5123475          0          1
+
+. means limit, level(80)
+
+    Variable |    Type             Obs        Mean       [80% Conf. Interval]
+-------------+---------------------------------------------------------------
+       limit | Arithmetic           16       .4375         .265786    .609214 
+             |  Geometric            7           1               1          1 
+             |   Harmonic            7           1               1          1 
+-----------------------------------------------------------------------------
+
+. mean limit, level(80)
+
+Mean estimation                   Number of obs   =         16
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [80% Conf. Interval]
+-------------+------------------------------------------------
+       limit |      .4375   .1280869       .265786     .609214
+--------------------------------------------------------------
+
+. cmdlog close
+(cmdlog /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6.do cl
+> osed)
+
+. log close
+      name:  <unnamed>
+       log:  /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6.
+> log
+  log type:  text
+ closed on:   2 Dec 2018, 15:05:58
+----------------------------------------------------------------------------------

@@ -1,0 +1,160 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\analysis/jiang_lab0.log
+  log type:  text
+ opened on:  12 Sep 2018, 15:32:13
+
+. cmdlog using analysis/jiang_lab0.log
+file C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\analysis/jiang_lab0.log already
+    exists
+r(602);
+
+. cmdlog using analysis/jiang_lab0.log
+file C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\analysis/jiang_lab0.log already
+    exists
+r(602);
+
+. cmdlog using analysis/jiang_lab0.log, replace
+file C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\analysis/jiang_lab0.log cannot
+    be modified or erased; likely cause is read-only directory or file
+r(608);
+
+. desc
+
+Contains data
+  obs:             0                          
+ vars:             0                          
+ size:             0                          
+Sorted by: 
+
+. import excel "C:\Users\ljiang\Desktop\ECO 220\Labs\Labo\Data\welfare.xls", sh
+> eet("Data") firstrow
+file C:/Users/ljiang/Desktop/ECO 220/Labs/Labo/Data/welfare.xls not found
+r(601);
+
+. import excel "C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\Data\welfare.xls", she
+> et("Data") firstrow
+
+. desc age cccost wage
+
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------
+age             byte    %10.0g                age
+cccost          double  %10.0g                cccost
+wage            double  %10.0g                wage
+
+. summarize
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          ID |      5,509        2755    1590.456          1       5509
+         age |      5,509    27.54765    6.815372         15         55
+        educ |          0
+        race |          0
+    noofdeps |      5,509    2.651479    .9728374          1          8
+-------------+---------------------------------------------------------
+      ageych |      5,509    3.009984    2.197594          0         13
+     english |          0
+      cccost |      5,509    113.0826    29.00002         80      247.5
+    gdcnaeyc |      5,509    .1784665    .1583378          0          1
+        smsa |          0
+-------------+---------------------------------------------------------
+     working |          0
+        wage |      5,509    3.734066    4.022819          0         50
+       hours |      5,509    16.20512    17.23733          0         60
+
+. cmdlog using analysis/jiang_lab0.log
+file C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\analysis/jiang_lab0.log already
+    exists
+r(602);
+
+. sum age wage hourw
+variable hourw not found
+r(111);
+
+. sum age wage hours
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         age |      5,509    27.54765    6.815372         15         55
+        wage |      5,509    3.734066    4.022819          0         50
+       hours |      5,509    16.20512    17.23733          0         60
+
+. sum age wage hours
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         age |      5,509    27.54765    6.815372         15         55
+        wage |      5,509    3.734066    4.022819          0         50
+       hours |      5,509    16.20512    17.23733          0         60
+
+. sum age wage hours, d
+
+                             age
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%           17             15
+ 5%           19             15
+10%           20             15       Obs               5,509
+25%           22             16       Sum of Wgt.       5,509
+
+50%           26                      Mean           27.54765
+                        Largest       Std. Dev.      6.815372
+75%           32             55
+90%           37             55       Variance        46.4493
+95%           40             55       Skewness       .7153244
+99%           46             55       Kurtosis       3.162546
+
+                            wage
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs               5,509
+25%            0              0       Sum of Wgt.       5,509
+
+50%         2.55                      Mean           3.734066
+                        Largest       Std. Dev.      4.022819
+75%         7.28             18
+90%            9          26.92       Variance       16.18308
+95%           10             30       Skewness       .6959186
+99%           12             50       Kurtosis       5.252054
+
+                            hours
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs               5,509
+25%            0              0       Sum of Wgt.       5,509
+
+50%            7                      Mean           16.20512
+                        Largest       Std. Dev.      17.23733
+75%           35             50
+90%           40             52       Variance       297.1257
+95%           40             55       Skewness       .2964769
+99%           40             60       Kurtosis       1.329559
+
+. generate Inwage=In(wage)
+unknown function In()
+r(133);
+
+. generate Inwage = In(wage)
+unknown function In()
+r(133);
+
+. drop
+varlist, if exp, or in range required
+r(100);
+
+. Inwage dorp
+command Inwage is unrecognized
+r(199);
+
+. generate lnwage=ln(wage)
+(2,745 missing values generated)
+
+. gen employed = (wage>0)
+
+. exit, clear

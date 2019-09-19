@@ -1,0 +1,87 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\analysis/jiang_lab10.log
+  log type:  text
+ opened on:  28 Nov 2018, 14:50:59
+
+. sum rate if sex ==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        rate |         12    1235.083    188.2829        913       1502
+
+. sum rate if sex == 0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        rate |          7        1600    189.2397       1362       1867
+
+. sum mass if sex==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        mass |         12    43.03333    6.868417       33.1       54.6
+
+. sum mass if sex ==0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        mass |          7        53.1    6.688547       46.9       62.9
+
+. scatter rate mass if sex == 0
+
+. scatter rate mass if sex == 1
+
+. twoway (scatter rate mass) (lfit rate mass), by(sex)
+
+. graph save Graph "C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\Analysis\bestfit 
+> line.gph"
+(file C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\Analysis\bestfit line.gph saved
+> )
+
+. regress rate mass if sex==1
+
+      Source |       SS           df       MS      Number of obs   =        12
+-------------+----------------------------------   F(1, 10)        =     33.13
+       Model |  299551.403         1  299551.403   Prob > F        =    0.0002
+    Residual |  90403.5136        10  9040.35136   R-squared       =    0.7682
+-------------+----------------------------------   Adj R-squared   =    0.7450
+       Total |  389954.917        11   35450.447   Root MSE        =    95.081
+
+------------------------------------------------------------------------------
+        rate |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        mass |   24.02607   4.173877     5.76   0.000     14.72609    33.32605
+       _cons |   201.1616   181.7009     1.11   0.294    -203.6933    606.0164
+------------------------------------------------------------------------------
+
+. regress rate mass if sex==0
+
+      Source |       SS           df       MS      Number of obs   =         7
+-------------+----------------------------------   F(1, 5)         =      2.70
+       Model |  75320.8098         1  75320.8098   Prob > F        =    0.1614
+    Residual |   139549.19         5   27909.838   R-squared       =    0.3505
+-------------+----------------------------------   Adj R-squared   =    0.2206
+       Total |      214870         6  35811.6667   Root MSE        =    167.06
+
+------------------------------------------------------------------------------
+        rate |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        mass |   16.75136   10.19697     1.64   0.161    -9.460792    42.96351
+       _cons |   710.5028   545.1286     1.30   0.249     -690.795    2111.801
+------------------------------------------------------------------------------
+
+. cmdlog close
+(cmdlog C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\analysis/jiang_lab10.do close
+> d)
+
+. log close'
+' invalid name
+r(198);
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\analysis/jiang_lab10.log
+  log type:  text
+ closed on:  28 Nov 2018, 16:00:52
+-------------------------------------------------------------------------------

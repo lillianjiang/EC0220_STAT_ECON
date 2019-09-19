@@ -1,0 +1,16 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\analysis/jiang_lab0.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}12 Sep 2018, 16:01:02
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\ljiang\Desktop\ECO220\Labs\Lab0\analysis/jiang_lab0.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}12 Sep 2018, 16:01:02
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

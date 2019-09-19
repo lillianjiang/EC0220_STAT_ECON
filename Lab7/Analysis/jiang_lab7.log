@@ -1,0 +1,95 @@
+-------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab7\analysis/jiang_lab7.log
+  log type:  text
+ opened on:  31 Oct 2018, 15:00:33
+
+. sum murder
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      murder |         15       522.6    100.5931        333        673
+
+. desc
+
+Contains data from NYC_crime.dta
+  obs:            15                          
+ vars:             9                          31 Oct 2018 14:59
+ size:           390                          
+-------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------------
+year            int     %10.0g                year
+murder          int     %10.0g                murder
+rape            int     %10.0g                rape
+robbery         int     %10.0g                robbery
+assault         int     %10.0g                assault
+burglary        long    %10.0g                burglary
+larceny         long    %10.0g                larceny
+cartheft        long    %10.0g                cartheft
+total           long    %10.0g                total
+-------------------------------------------------------------------------------------
+Sorted by: 
+
+. ttest murder=400,level(99)
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [99% Conf. Interval]
+---------+--------------------------------------------------------------------
+  murder |      15       522.6    25.97303    100.5931    445.2824    599.9176
+------------------------------------------------------------------------------
+    mean = mean(murder)                                           t =   4.7203
+Ho: mean = 400                                   degrees of freedom =       14
+
+   Ha: mean < 400               Ha: mean != 400               Ha: mean > 400
+ Pr(T < t) = 0.9998         Pr(|T| > |t|) = 0.0003          Pr(T > t) = 0.0002
+
+. sum burglary
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    burglary |         15       23889    6457.315      16765      38352
+
+. ttest burglary=220,level(95)
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+burglary |      15       23889    1667.271    6457.315    20313.06    27464.94
+------------------------------------------------------------------------------
+    mean = mean(burglary)                                         t =  14.1962
+Ho: mean = 220                                   degrees of freedom =       14
+
+   Ha: mean < 220               Ha: mean != 220               Ha: mean > 220
+ Pr(T < t) = 1.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 0.0000
+
+. ttest burglary=22000,level(95)
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+burglary |      15       23889    1667.271    6457.315    20313.06    27464.94
+------------------------------------------------------------------------------
+    mean = mean(burglary)                                         t =   1.1330
+Ho: mean = 22000                                 degrees of freedom =       14
+
+  Ha: mean < 22000             Ha: mean != 22000             Ha: mean > 22000
+ Pr(T < t) = 0.8619         Pr(|T| > |t|) = 0.2762          Pr(T > t) = 0.1381
+
+. cmglog close
+command cmglog is unrecognized
+r(199);
+
+. cmdlog close
+(cmdlog C:\Users\ljiang\Desktop\ECO220\Labs\Lab7\Analysis/Jiang_lab7.do closed)
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab7\analysis/jiang_lab7.log
+  log type:  text
+ closed on:  31 Oct 2018, 15:29:29
+-------------------------------------------------------------------------------------

@@ -1,0 +1,106 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Problemset1\Analysis/jiang_pro
+> blemset1.log
+  log type:  text
+ opened on:  15 Sep 2018, 19:58:13
+
+. desc
+
+Contains data from mexico.dta
+  obs:         1,437                          
+ vars:             4                          15 Sep 2018 19:58
+ size:        35,925                          
+-------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------
+numc            double  %10.0g                numc
+hhsize          byte    %10.0g                hhsize
+hhynet          double  %10.0g                hhynet
+pcynet          double  %10.0g                pcynet
+-------------------------------------------------------------------------------
+Sorted by: 
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        numc |      1,437    3.07e+11    1.35e+11   1.20e+11   5.28e+11
+      hhsize |      1,437    4.862213    2.650316          1         22
+      hhynet |      1,437    74110.03      106782     -30000    1608228
+      pcynet |      1,437    19700.07    39726.66  -4285.714     804114
+
+. sum hhsize, d
+
+                           hhsize
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            2              1       Obs               1,437
+25%            3              1       Sum of Wgt.       1,437
+
+50%            5                      Mean           4.862213
+                        Largest       Std. Dev.      2.650316
+75%            6             18
+90%            8             19       Variance       7.024177
+95%           10             21       Skewness        1.51069
+99%           14             22       Kurtosis        7.76919
+
+. sum hhsize if hhsize==5
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      hhsize |        269           5           0          5          5
+
+. sum hhsize if hhsize==8
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      hhsize |         67           8           0          8          8
+
+. sum hhsize if hhsize==4
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      hhsize |        238           4           0          4          4
+
+. twoway histogram hhsize, freq
+
+. graph save Graph "C:\Users\ljiang\Desktop\ECO220\Labs\Problemset1\Analysis\hh
+> size.gph"
+(file C:\Users\ljiang\Desktop\ECO220\Labs\Problemset1\Analysis\hhsize.gph saved
+> )
+
+. sum pcynet, d
+
+                           pcynet
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%        -1397      -4285.714
+ 5%     3.571429        -3898.5
+10%     898.8571      -3216.914       Obs               1,437
+25%         3780        -3185.8       Sum of Wgt.       1,437
+
+50%      9516.08                      Mean           19700.07
+                        Largest       Std. Dev.      39726.66
+75%     21164.45         268260
+90%        45600       469055.3       Variance       1.58e+09
+95%        68000         594000       Skewness       9.840844
+99%     157428.5         804114       Kurtosis       153.9931
+
+. twoway histogram pcynet, freq
+
+. graph save Graph "C:\Users\ljiang\Desktop\ECO220\Labs\Problemset1\Analysis\pc
+> ynet.gph"
+(file C:\Users\ljiang\Desktop\ECO220\Labs\Problemset1\Analysis\pcynet.gph saved
+> )
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Problemset1\Analysis/jiang_pro
+> blemset1.log
+  log type:  text
+ closed on:  15 Sep 2018, 19:58:14
+-------------------------------------------------------------------------------

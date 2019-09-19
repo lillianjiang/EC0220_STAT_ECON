@@ -1,0 +1,34 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\analysis/jiang_lab10smok
+> e.log
+  log type:  text
+ opened on:  28 Nov 2018, 15:34:46
+
+. regress cigs cigpric
+
+      Source |       SS           df       MS      Number of obs   =       807
+-------------+----------------------------------   F(1, 805)       =      0.10
+       Model |  19.6715251         1  19.6715251   Prob > F        =    0.7467
+    Residual |  151734.011       805  188.489455   R-squared       =    0.0001
+-------------+----------------------------------   Adj R-squared   =   -0.0011
+       Total |  151753.683       806  188.280003   Root MSE        =    13.729
+
+------------------------------------------------------------------------------
+        cigs |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     cigpric |  -.0329696   .1020559    -0.32   0.747    -.2332966    .1673574
+       _cons |   10.67457   6.172959     1.73   0.084    -1.442422    22.79157
+------------------------------------------------------------------------------
+
+. cmdlog close
+(cmdlog C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\analysis/jiang_lab10smoke.do 
+> closed)
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab10\analysis/jiang_lab10smok
+> e.log
+  log type:  text
+ closed on:  28 Nov 2018, 16:00:33
+-------------------------------------------------------------------------------

@@ -1,0 +1,278 @@
+-------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab9\analysis/jiang_lab9.log
+  log type:  text
+ opened on:  14 Nov 2018, 16:15:43
+
+. 
+. describe v090
+
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------------
+v090            byte    %8.0g      v090       gun control
+
+. 
+. label list v090
+v090:
+           1 more difficult
+           2 same as now
+           3 easier
+           9 na
+
+. 
+. sum v090
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        v090 |      1,544    1.455311    .5787983          1          3
+
+. 
+. tab v090
+
+   gun control |      Freq.     Percent        Cum.
+---------------+-----------------------------------
+more difficult |        908       58.81       58.81
+   same as now |        569       36.85       95.66
+        easier |         67        4.34      100.00
+---------------+-----------------------------------
+         Total |      1,544      100.00
+
+. 
+. gen sgc = 0
+
+. 
+. drop sgc
+
+. 
+.  gen sgc = 0
+
+. 
+. drop sgc
+
+. 
+. gen sgc = 0
+
+. 
+. replace sgc =1 if v090 < 2
+(908 real changes made)
+
+. 
+. replace sgc =. if v090 > 3
+(11 real changes made, 11 to missing)
+
+. 
+. drop sgc
+
+. 
+. gen sgc = 0
+
+. 
+. replace sgc =1 if v090 < 2
+(908 real changes made)
+
+. 
+. replace sgc =. if v090 > 3
+(11 real changes made, 11 to missing)
+
+. 
+. tab sgc
+
+        sgc |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        636       41.19       41.19
+          1 |        908       58.81      100.00
+------------+-----------------------------------
+      Total |      1,544      100.00
+
+. 
+. tab v144
+
+     gender |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       male |        674       43.34       43.34
+     female |        881       56.66      100.00
+------------+-----------------------------------
+      Total |      1,555      100.00
+
+. 
+. tab sgc v144
+
+           |        gender
+       sgc |      male     female |     Total
+-----------+----------------------+----------
+         0 |       362        274 |       636 
+         1 |       306        602 |       908 
+-----------+----------------------+----------
+     Total |       668        876 |     1,544 
+
+
+. 
+. proportion sgc,over(v144) level(99)
+
+Proportion estimation             Number of obs   =      1,544
+
+      _prop_1: sgc = 0
+      _prop_2: sgc = 1
+
+         male: v144 = male
+       female: v144 = female
+
+--------------------------------------------------------------
+             |                                   Logit
+        Over | Proportion   Std. Err.     [99% Conf. Interval]
+-------------+------------------------------------------------
+_prop_1      |
+        male |   .5419162   .0192919      .4919091    .5910928
+      female |   .3127854   .0156735      .2738487    .3545551
+-------------+------------------------------------------------
+_prop_2      |
+        male |   .4580838   .0192919      .4089072    .5080909
+      female |   .6872146   .0156735      .6454449    .7261513
+--------------------------------------------------------------
+
+. 
+. sum v090
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        v090 |      1,544    1.455311    .5787983          1          3
+
+. 
+. prtest sgc, by(v144) level(99)
+
+Two-sample test of proportions                  male: Number of obs =      668
+                                              female: Number of obs =      876
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [99% Conf. Interval]
+-------------+----------------------------------------------------------------
+        male |   .4580838   .0192775                      .4084283    .5077393
+      female |   .6872146   .0156645                      .6468655    .7275638
+-------------+----------------------------------------------------------------
+        diff |  -.2291308   .0248395                      -.293113   -.1651486
+             |  under Ho:   .0252818    -9.06   0.000
+------------------------------------------------------------------------------
+        diff = prop(male) - prop(female)                          z =  -9.0631
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.0000         Pr(|Z| > |z|) = 0.0000          Pr(Z > z) = 1.0000
+
+. 
+. label list v138
+v138:
+           1 agree strongly
+           2 agree somewhat
+           3 neither agree nor disagree
+           4 disagree somewhat
+           5 disagree strongly
+           9 na
+
+. 
+. gen ptc = 0
+
+. 
+. replace ptc = 1 if v138<3
+(893 real changes made)
+
+. 
+. replace ptc = . if v138 ==9
+(0 real changes made)
+
+. 
+. tab ptc
+
+        ptc |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        662       42.57       42.57
+          1 |        893       57.43      100.00
+------------+-----------------------------------
+      Total |      1,555      100.00
+
+. 
+. replace ptc =. if v138>5
+(5 real changes made, 5 to missing)
+
+. 
+. tab ptc
+
+        ptc |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        657       42.39       42.39
+          1 |        893       57.61      100.00
+------------+-----------------------------------
+      Total |      1,550      100.00
+
+. 
+. tab ptc v144
+
+           |        gender
+       ptc |      male     female |     Total
+-----------+----------------------+----------
+         0 |       336        321 |       657 
+         1 |       336        557 |       893 
+-----------+----------------------+----------
+     Total |       672        878 |     1,550 
+
+
+. 
+. label list v144
+v144:
+           1 male
+           2 female
+
+. 
+. proportion ptc, over(v144) level(99.9)
+
+Proportion estimation             Number of obs   =      1,550
+
+      _prop_1: ptc = 0
+      _prop_2: ptc = 1
+
+         male: v144 = male
+       female: v144 = female
+
+--------------------------------------------------------------
+             |                                   Logit
+        Over | Proportion   Std. Err.   [99.9% Conf. Interval]
+-------------+------------------------------------------------
+_prop_1      |
+        male |         .5   .0193023      .4367052    .5632948
+      female |   .3656036   .0162624      .3138282    .4206841
+-------------+------------------------------------------------
+_prop_2      |
+        male |         .5   .0193023      .4367052    .5632948
+      female |   .6343964   .0162624      .5793159    .6861718
+--------------------------------------------------------------
+
+. 
+. prtest ptc, by(v144) level(99)
+
+Two-sample test of proportions                  male: Number of obs =      672
+                                              female: Number of obs =      878
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [99% Conf. Interval]
+-------------+----------------------------------------------------------------
+        male |         .5   .0192879                      .4503176    .5496824
+      female |   .6343964   .0162532                      .5925309    .6762618
+-------------+----------------------------------------------------------------
+        diff |  -.1343964   .0252228                      -.199366   -.0694267
+             |  under Ho:   .0253286    -5.31   0.000
+------------------------------------------------------------------------------
+        diff = prop(male) - prop(female)                          z =  -5.3061
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.0000         Pr(|Z| > |z|) = 0.0000          Pr(Z > z) = 1.0000
+
+. 
+. cmdlog close
+(cmdlog C:\Users\ljiang\Desktop\ECO220\Labs\Lab9\analysis/jiang_lab9.do closed)
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab9\analysis/jiang_lab9.log
+  log type:  text
+ closed on:  14 Nov 2018, 16:15:44
+-------------------------------------------------------------------------------------

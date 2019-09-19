@@ -1,0 +1,107 @@
+----------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6_
+> 2.log
+  log type:  text
+ opened on:   2 Dec 2018, 15:29:45
+
+. scatter sbp gestage
+
+. graph save Graph "/Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/sca
+> tter_infant.gph"
+(file /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/scatter_infant.gp
+> h saved)
+
+. graph save Graph "/Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/sca
+> tter_infant.gph", replace
+(file /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/scatter_infant.gp
+> h saved)
+
+. graph save Graph "/Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/sca
+> tter_infant.gph", replace
+(file /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/scatter_infant.gp
+> h saved)
+
+. regress gestage sbp
+
+      Source |       SS           df       MS      Number of obs   =       100
+-------------+----------------------------------   F(1, 98)        =      8.40
+       Model |  50.1984761         1  50.1984761   Prob > F        =    0.0046
+    Residual |  585.591524        98  5.97542371   R-squared       =    0.0790
+-------------+----------------------------------   Adj R-squared   =    0.0696
+       Total |      635.79        99  6.42212121   Root MSE        =    2.4445
+
+------------------------------------------------------------------------------
+     gestage |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         sbp |   .0624452   .0215446     2.90   0.005     .0196907    .1051998
+       _cons |   25.95008   1.043359    24.87   0.000     23.87957    28.02059
+------------------------------------------------------------------------------
+
+. regress gestage sbp, by(sex)
+option by() not allowed
+r(198);
+
+. regress gestage sbp, if sex ==0
+option if not allowed
+r(198);
+
+. regress gestage sbp if sex ==0
+
+      Source |       SS           df       MS      Number of obs   =        56
+-------------+----------------------------------   F(1, 54)        =      4.52
+       Model |  34.3238458         1  34.3238458   Prob > F        =    0.0380
+    Residual |  409.801154        54  7.58891026   R-squared       =    0.0773
+-------------+----------------------------------   Adj R-squared   =    0.0602
+       Total |     444.125        55       8.075   Root MSE        =    2.7548
+
+------------------------------------------------------------------------------
+     gestage |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         sbp |   .0708804   .0333287     2.13   0.038     .0040605    .1377004
+       _cons |   25.58159   1.591746    16.07   0.000     22.39033    28.77285
+------------------------------------------------------------------------------
+
+. regress gestage sbp if sex == 1
+
+      Source |       SS           df       MS      Number of obs   =        44
+-------------+----------------------------------   F(1, 42)        =      4.07
+       Model |  16.9214452         1  16.9214452   Prob > F        =    0.0501
+    Residual |  174.714918        42  4.15987901   R-squared       =    0.0883
+-------------+----------------------------------   Adj R-squared   =    0.0666
+       Total |  191.636364        43  4.45665962   Root MSE        =    2.0396
+
+------------------------------------------------------------------------------
+     gestage |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         sbp |   .0531361   .0263458     2.02   0.050    -.0000319    .1063041
+       _cons |    26.3658   1.297952    20.31   0.000     23.74643    28.98518
+------------------------------------------------------------------------------
+
+. desc sex
+
+              storage   display    value
+variable name   type    format     label      variable label
+----------------------------------------------------------------------------------
+sex             double  %9.0f      sex        gender
+
+.  label list sex
+sex:
+           0 Female
+           1 Male
+
+. scatter sbp gestage if sex == 0
+
+. twoway(scatter sbp gestage) (lfit sbp gestage), by(sex)
+
+. cmdlog close
+(cmdlog /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6_2.do 
+> closed)
+
+. log close
+      name:  <unnamed>
+       log:  /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6_
+> 2.log
+  log type:  text
+ closed on:   4 Dec 2018, 13:30:12
+----------------------------------------------------------------------------------

@@ -1,0 +1,344 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab1\Analysis/jiang_lab1.log
+  log type:  text
+ opened on:  19 Sep 2018, 14:51:27
+
+. desc
+
+Contains data from child_mortality.dta
+  obs:           209                          
+ vars:            17                          19 Sep 2018 14:50
+ size:        17,138                          
+-------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------
+country         str32   %32s                  name of country
+healthexp       int     %8.0g                 Per capita total expenditure on
+                                                health, measured in US$
+dev             byte    %8.0g                 country development group
+fertility       float   %9.0g                 number of children per woman
+sanitation      byte    %8.0g                 % of the population with at least
+                                                adequate access to excreta
+                                                disposal facilities
+maleliteracy    float   %9.0g                 % of men ages 15 and above who
+                                                can read and write
+femliteracy     float   %9.0g                 % of women ages 15 and above who
+                                                can read and write a short
+lifeexp         float   %9.0g                 life expectancy at birth
+water           float   %9.0g                 % of the population with access
+                                                to an adequate amount of clean
+                                                water
+infantdeath     float   %9.0g                 the number of infant deaths per
+                                                1,000 live births
+alcohol         float   %9.0g                 alcohol consumption per adult in
+                                                liters
+marriageage     float   %9.0g                 mean age at first marriage of
+                                                women
+ownhealthexp    float   %9.0g                 Out-of-pocket expenditure as % of
+                                                total health expenditure
+dtp3rate        byte    %8.0g                 % of 1y-olds immunized with 3
+                                                doses of DTP
+femaleemployr~e float   %9.0g                 % of female population, age above
+                                                15, that has been employed
+mcvrate         byte    %8.0g                 % of 1y-olds immunized with
+                                                meningitis)
+gdppercap       float   %9.0g                 GDP per capita in 2000 US$
+-------------------------------------------------------------------------------
+Sorted by: 
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     country |          0
+   healthexp |        192    812.6563    1170.273         17       6347
+         dev |        190    2.010526    .7051547          1          3
+   fertility |        195    2.955798     1.53657       .873      7.267
+  sanitation |        159    77.86792    21.64533         24        100
+-------------+---------------------------------------------------------
+maleliteracy |        103    88.36866    14.03201   36.68067    99.8058
+ femliteracy |        103     81.6925    20.95823    20.8379    99.8112
+     lifeexp |        192    68.09197    10.55156     41.681      82.27
+       water |        164    81.69939    18.92346         22        100
+ infantdeath |        180    37.64015    35.44908        2.2        165
+-------------+---------------------------------------------------------
+     alcohol |        178    6.419663    4.638126          0       18.2
+ marriageage |        174    24.53767    3.782837    17.6002   33.26954
+ownhealthexp |        177    34.42305    19.48503      3.842    88.8636
+    dtp3rate |        178    86.10674    15.42853         20         99
+femaleempl~e |        176    47.03239     14.7028       12.1       83.5
+-------------+---------------------------------------------------------
+     mcvrate |        178     84.8427    15.61283         23         99
+   gdppercap |        174    7120.947    10632.71   88.67439   51934.26
+
+. gen dev = (dev>0)
+variable dev already defined
+r(110);
+
+. gen dev1 = (dev>0)
+
+. help
+
+. drop if dev=.
+=exp not allowed
+r(101);
+
+. drop if dev=.
+=exp not allowed
+r(101);
+
+. drop if dev==.
+(19 observations deleted)
+
+. sum dev
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         dev |        190    2.010526    .7051547          1          3
+
+. drop if dev==.
+(0 observations deleted)
+
+. sum dev
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         dev |        190    2.010526    .7051547          1          3
+
+. desc dev
+
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------
+dev             byte    %8.0g                 country development group
+
+. sum dev, d
+
+                  country development group
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            1              1       Obs                 190
+25%            2              1       Sum of Wgt.         190
+
+50%            2                      Mean           2.010526
+                        Largest       Std. Dev.      .7051547
+75%            3              3
+90%            3              3       Variance       .4972431
+95%            3              3       Skewness      -.0146452
+99%            3              3       Kurtosis       2.021715
+
+. sum dev if dev==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         dev |         46           1           0          1          1
+
+. sum dev if dev==2
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         dev |         96           2           0          2          2
+
+. sum dev if dev==3
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         dev |         48           3           0          3          3
+
+. sum dev if dev==0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         dev |          0
+
+. sum dev if dev==4
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         dev |          0
+
+. sum dev1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        dev1 |        190           1           0          1          1
+
+. tab dev
+
+    country |
+development |
+      group |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |         46       24.21       24.21
+          2 |         96       50.53       74.74
+          3 |         48       25.26      100.00
+------------+-----------------------------------
+      Total |        190      100.00
+
+. sum fertility
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   fertility |        190    2.983935    1.545181       .873      7.267
+
+. gen highfert = 0;
+0; invalid name
+r(198);
+
+. gen highfert = 0;
+0; invalid name
+r(198);
+
+. sum fertility
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   fertility |        190    2.983935    1.545181       .873      7.267
+
+. sum fertility ,d
+
+                number of children per woman
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         .991           .873
+ 5%        1.275           .991
+10%        1.323          1.192       Obs                 190
+25%          1.8          1.214       Sum of Wgt.         190
+
+50%        2.464                      Mean           2.983935
+                        Largest       Std. Dev.      1.545181
+75%        4.106           6.56
+90%       5.5465          6.781       Variance       2.387585
+95%         6.02          6.973       Skewness       .8547814
+99%        6.973          7.267       Kurtosis       2.680477
+
+. gen highfert=(fertility >2.464) if fertility !=.
+
+. tab highfert
+
+   highfert |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         95       50.00       50.00
+          1 |         95       50.00      100.00
+------------+-----------------------------------
+      Total |        190      100.00
+
+. tab dev highfert
+
+   country |
+developmen |       highfert
+   t group |         0          1 |     Total
+-----------+----------------------+----------
+         1 |        46          0 |        46 
+         2 |        47         49 |        96 
+         3 |         2         46 |        48 
+-----------+----------------------+----------
+     Total |        95         95 |       190 
+
+
+. graph pie, over(dev)
+
+. tab dev  infantdeath
+too many values
+r(134);
+
+. sum  infantdeath if dev==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ infantdeath |         45    6.776199    4.116462        2.2   17.11425
+
+. sum  infantdeath if dev==2
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ infantdeath |         83    30.51155    21.67834        2.3        100
+
+. sum  infantdeath if dev==3
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ infantdeath |         48    81.05916     31.0593       23.9        165
+
+. sum  infantdeath if country ==Bulgaria
+Bulgaria not found
+r(111);
+
+. sum infantdeath if country =Bulgaria
+type mismatch
+r(109);
+
+. desc  infantdeath if country ==Bulgaria
+if not allowed
+r(101);
+
+. sum  infantdeath if country == "Bulgaria"
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ infantdeath |          1        11.1           .       11.1       11.1
+
+. sum  infantdeath if country == "United States"
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ infantdeath |          1         6.8           .        6.8        6.8
+
+. gen high = (  infantdeath >60)
+
+. tab high
+
+       high |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        130       68.42       68.42
+          1 |         60       31.58      100.00
+------------+-----------------------------------
+      Total |        190      100.00
+
+. tab dev high
+
+   country |
+developmen |         high
+   t group |         0          1 |     Total
+-----------+----------------------+----------
+         1 |        45          1 |        46 
+         2 |        73         23 |        96 
+         3 |        12         36 |        48 
+-----------+----------------------+----------
+     Total |       130         60 |       190 
+
+
+. histogram infantdeath, frequency
+(bin=13, start=2.2, width=12.523077)
+
+. graph describe
+
+Graph stored in memory
+
+        name:  Graph
+      format:  live
+     created:  19 Sep 2018 15:37:10
+      scheme:  s2color
+        size:  4 x 5.5
+    dta file:  child_mortality.dta dated 19 Sep 2018 14:50
+     command:  twoway (histogram infantdeath [], ytitle(`"Frequency"')
+               xtitle(`"the number of infant deaths per 1,000 live births"')
+               legend(cols(1)) barwidth(-99) plotregion(margin(b=0))
+               legend(nodraw) frequency start(2.200000047683716) bin(13) ) if
+               __000000 || ||
+
+. histogram infantdeath, frequency by(dev)
+
+. twoway (scatter infantdeath sanitation)
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab1\Analysis/jiang_la
+> b1.log
+  log type:  text
+ closed on:  19 Sep 2018, 16:07:00
+-----------------------------------------------------------------------

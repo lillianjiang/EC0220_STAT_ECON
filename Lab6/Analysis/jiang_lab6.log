@@ -1,0 +1,282 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab6\Analysis/jiang_lab6.log
+  log type:  text
+ opened on:  24 Oct 2018, 14:56:46
+
+. save Card Krueger.dta, replace
+invalid 'Krueger.dta' 
+r(198);
+
+. desc
+
+Contains data from C:\Users\ljiang\Desktop\ECO220\Labs\Lab6\Data\Card Krueger.d
+> ta
+  obs:           410                          
+ vars:            21                          10 Mar 2014 10:49
+ size:        30,750                          
+-------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------
+chain           byte    %8.0g                 1=BK, 2=KFC, 3=RoyRog, 4=Wendys
+state           byte    %8.0g                 1=NJ, 0=PA
+empft1          float   %9.0g                 # full time employees
+emppt1          float   %9.0g                 # of part time employees
+nmgrs           float   %9.0g                 # managers and ast. managers
+stwage          float   %9.0g                 starting wage
+inctime         float   %9.0g                 usual time in months until first
+                                                raise
+firstinc        float   %9.0g                 usual amount of first raise
+pctaff          float   %9.0g                 % of staff effected by new
+                                                minimum wage
+psoda           float   %9.0g                 price of medium soda, tax incl
+pfry            float   %9.0g                 price of small fry, tax incl
+pentree         float   %9.0g                 price of entree, tax incl
+empft2          float   %9.0g                 num full time employees 2nd
+                                                interview
+emppt2          float   %9.0g                 # of part time employees, 2nd
+                                                interview
+nmgrs2          float   %9.0g                 # of managers and ast managers,
+                                                2nd interview
+wage_st2        float   %9.0g                 starting wage, 2nd interview
+inctime2        byte    %8.0g                 usual time until first raise, 2nd
+                                                interview
+firstin2        float   %9.0g                 usual amount of first raise, 2nd
+                                                interview
+psoda2          float   %9.0g                 price of med soda, 2nd interview
+pfry2           float   %9.0g                 price of small fry, 2nd interview
+pentree2        float   %9.0g                 price of entree, 2nd interview
+-------------------------------------------------------------------------------
+Sorted by: 
+
+. browse
+
+. tab
+varlist required
+r(100);
+
+. tab chain
+
+      1=BK, |
+     2=KFC, |
+  3=RoyRog, |
+   4=Wendys |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |        171       41.71       41.71
+          2 |         80       19.51       61.22
+          3 |         99       24.15       85.37
+          4 |         60       14.63      100.00
+------------+-----------------------------------
+      Total |        410      100.00
+
+. desc state = 1
+=exp not allowed
+r(101);
+
+. tab state
+
+ 1=NJ, 0=PA |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         79       19.27       19.27
+          1 |        331       80.73      100.00
+------------+-----------------------------------
+      Total |        410      100.00
+
+. sum state if state = 1
+invalid syntax
+r(198);
+
+. sum state if state ==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       state |        331           1           0          1          1
+
+. sum empft1, emppt1, empft2 if state ==1
+invalid 'empft2' 
+r(198);
+
+. sum state if state ==1, d
+
+                         1=NJ, 0=PA
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            1              1       Obs                 331
+25%            1              1       Sum of Wgt.         331
+
+50%            1                      Mean                  1
+                        Largest       Std. Dev.             0
+75%            1              1
+90%            1              1       Variance              0
+95%            1              1       Skewness              .
+99%            1              1       Kurtosis              .
+
+. sum empft1 if state ==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      empft1 |        326    7.723926     7.96389          0         60
+
+. sum emppt1 if state ==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      emppt1 |        328     18.6753    10.20586          0         60
+
+. 
+. 
+. sum empft2 if state ==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      empft2 |        321    8.445483    7.844942          0         40
+
+. 
+. 
+. drop state if state == 0
+invalid syntax
+r(198);
+
+. drop state == 0
+== invalid name
+r(198);
+
+. drop if state == 0
+(79 observations deleted)
+
+. sum  empft1, emppt1, empft2, emppt2
+invalid 'empft2' 
+r(198);
+
+.  sum empft1, emppt1, empft2, emppt2
+invalid 'empft2' 
+r(198);
+
+.  sum empft1 emppt1 empft2 emppt2
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      empft1 |        326    7.723926     7.96389          0         60
+      emppt1 |        328     18.6753    10.20586          0         60
+      empft2 |        321    8.445483    7.844942          0         40
+      emppt2 |        323    18.37307    10.80736          0         60
+
+. sum empft1 empft2, d
+
+                    # full time employees
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 326
+25%            2              0       Sum of Wgt.         326
+
+50%         5.75                      Mean           7.723926
+                        Largest       Std. Dev.       7.96389
+75%         11.5             35
+90%           18             35       Variance       63.42355
+95%           23             40       Skewness        1.93256
+99%           35             60       Kurtosis       9.489963
+
+            num full time employees 2nd interview
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 321
+25%            2              0       Sum of Wgt.         321
+
+50%            6                      Mean           8.445483
+                        Largest       Std. Dev.      7.844942
+75%           13             30
+90%           20             30       Variance       61.54311
+95%           25             35       Skewness       1.050718
+99%           30             40       Kurtosis       3.743966
+
+. sum emppt1 emppt2, d
+
+                  # of part time employees
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            3              0
+ 5%            6              2
+10%            7              3       Obs                 328
+25%        10.75              3       Sum of Wgt.         328
+
+50%           16                      Mean            18.6753
+                        Largest       Std. Dev.      10.20586
+75%           25             46
+90%           33             50       Variance       104.1595
+95%           36             60       Skewness       .9260549
+99%           46             60       Kurtosis       3.949567
+
+           # of part time employees, 2nd interview
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            3              0
+10%            6              0       Obs                 323
+25%           10              0       Sum of Wgt.         323
+
+50%           16                      Mean           18.37307
+                        Largest       Std. Dev.      10.80736
+75%           25             45
+90%           35             50       Variance       116.7991
+95%           38             50       Skewness        .657268
+99%           45             60       Kurtosis       3.186354
+
+. twoway empft1, freq
+empft1 is not a twoway plot type
+r(198);
+
+. twoway histogram emptf1, freq
+variable emptf1 not found
+r(111);
+
+. twoway histogram empft1, freq
+
+.  twoway histogram empft2, freq
+
+. twoway histogram emppt1, freq
+
+. 
+. 
+. twoway histogram emppt2, freq
+
+. 
+. 
+. gen fte1 = empft1 + (1/2)* emppt1
+(5 missing values generated)
+
+. gen fte2 = empft2 + (1/2)* emppt2
+(11 missing values generated)
+
+. sum fte1 fte2
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Ma
+> x
+-------------+--------------------------------------------------------
+> -
+        fte1 |        326    17.06518    8.727993          3         8
+> 0
+        fte2 |        320    17.57266    8.778737          0       55.
+> 5
+
+. gen dfte = fte2 - fte1
+(16 missing values generated)
+
+. sum dfte
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        dfte |        315     .452381    8.230852        -34         35
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ljiang\Desktop\ECO220\Labs\Lab6\Analysis/jiang_lab6.log
+  log type:  text
+ closed on:  24 Oct 2018, 15:59:50
+-------------------------------------------------------------------------------------

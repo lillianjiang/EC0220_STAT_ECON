@@ -1,0 +1,243 @@
+----------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6_
+> 3.log
+  log type:  text
+ opened on:   4 Dec 2018, 13:31:30
+
+. sum violent_crime_rate
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+violent_cr~e |         51    441.6275    241.3983         81       1508
+
+. sum violent_crime_rate, d
+
+                     violent_crime_rate
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%           81             81
+ 5%          114            110
+10%          237            114       Obs                  51
+25%          281            167       Sum of Wgt.          51
+
+50%          384                      Mean           441.6275
+                        Largest       Std. Dev.      241.3983
+75%          554            787
+90%          707            805       Variance       58273.16
+95%          805            812       Skewness       1.757343
+99%         1508           1508       Kurtosis       8.609668
+
+. histogram violent_crime_rate, frequency
+(bin=7, start=81, width=203.85714)
+
+. histogram violent_crime_rate, bin(15) frequency
+(bin=15, start=81, width=95.133333)
+
+. histogram  violent_crime_rate if  violent_crime_rate<1508, bin(15) frequency
+(bin=15, start=81, width=48.733333)
+
+. graph save Graph "/Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/3_b
+> in=15 w:o outline.gph"
+(file /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/3_bin=15 w:o outl
+> ine.gph saved)
+
+. graph save Graph "/Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/3_b
+> in=15 w:o outline.gph", replace
+(file /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/3_bin=15 w:o outl
+> ine.gph saved)
+
+. sum police, d
+
+                           police
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          104            104
+ 5%          133            122
+10%          145            133       Obs                  51
+25%          163            139       Sum of Wgt.          51
+
+50%          190                      Mean           224.5294
+                        Largest       Std. Dev.      170.2403
+75%          234            300
+90%          282            351       Variance       28981.77
+95%          351            412       Skewness        5.80764
+99%         1348           1348       Kurtosis       38.74889
+
+. sum violent_crime_rate, d if police < 190
+option if not allowed
+r(198);
+
+. sum violent_crime_rate, d, if police < 190
+
+                     violent_crime_rate
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%           81             81
+ 5%          110            110
+10%          114            114       Obs                  25
+25%          253            167       Sum of Wgt.          25
+
+50%          349                      Mean                363
+                        Largest       Std. Dev.      179.3532
+75%          490            505
+90%          545            545       Variance       32167.58
+95%          707            707       Skewness       .5304235
+99%          805            805       Kurtosis       3.035617
+
+. sum violent_crime_rate, d, if police >= 190
+
+                     violent_crime_rate
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          237            237
+ 5%          244            244
+10%          256            256       Obs                  26
+25%          325            267       Sum of Wgt.          26
+
+50%          500                      Mean           517.2308
+                        Largest       Std. Dev.      271.1801
+75%          657            758
+90%          787            787       Variance       73538.66
+95%          812            812       Skewness       1.877646
+99%         1508           1508       Kurtosis       7.787241
+
+. regress violent_crime_rate poverty
+
+      Source |       SS           df       MS      Number of obs   =        51
+-------------+----------------------------------   F(1, 49)        =      9.89
+       Model |  489129.494         1  489129.494   Prob > F        =    0.0028
+    Residual |  2424528.43        49   49480.172   R-squared       =    0.1679
+-------------+----------------------------------   Adj R-squared   =    0.1509
+       Total |  2913657.92        50  58273.1584   Root MSE        =    222.44
+
+------------------------------------------------------------------------------
+violent_cr~e |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     poverty |   32.69674    10.3994     3.14   0.003     11.79837    53.59511
+       _cons |   63.75569   124.1551     0.51   0.610    -185.7433    313.2547
+------------------------------------------------------------------------------
+
+. regress violent_crime_rate single_parent
+
+      Source |       SS           df       MS      Number of obs   =        51
+-------------+----------------------------------   F(1, 49)        =     71.67
+       Model |  1730496.32         1  1730496.32   Prob > F        =    0.0000
+    Residual |  1183161.61        49  24146.1552   R-squared       =    0.5939
+-------------+----------------------------------   Adj R-squared   =    0.5856
+       Total |  2913657.92        50  58273.1584   Root MSE        =    155.39
+
+-------------------------------------------------------------------------------
+violent_cri~e |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+single_parent |   43.47858    5.13587     8.47   0.000     33.15766    53.79949
+        _cons |  -575.6008   122.1134    -4.71   0.000    -820.9969   -330.2046
+-------------------------------------------------------------------------------
+
+. regress violent_crime_rate umeployed
+variable umeployed not found
+r(111);
+
+. regress violent_crime_rate unemployed
+
+      Source |       SS           df       MS      Number of obs   =        51
+-------------+----------------------------------   F(1, 49)        =     10.75
+       Model |  524043.978         1  524043.978   Prob > F        =    0.0019
+    Residual |  2389613.94        49  48767.6315   R-squared       =    0.1799
+-------------+----------------------------------   Adj R-squared   =    0.1631
+       Total |  2913657.92        50  58273.1584   Root MSE        =    220.83
+
+------------------------------------------------------------------------------
+violent_cr~e |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  unemployed |   105.0318   32.04077     3.28   0.002      40.6435    169.4202
+       _cons |   27.67848   130.0094     0.21   0.832    -233.5852    288.9421
+------------------------------------------------------------------------------
+
+. twoway(scatter violent_crime_rate poverty) (lfit violent_crime_rate poverty)
+
+. twoway(scatter violent_crime_rate single_parent) (lfit violent_crime_rate single
+> _parent)
+
+. twoway(scatter violent_crime_rate unemployed) (lfit violent_crime_rate unemploye
+> d)
+
+. graph save Graph "/Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/3_u
+> nemployed.gph"
+(file /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/Analysis/3_unemployed.gph 
+> saved)
+
+. sum high_schoo;
+; invalid name
+r(198);
+
+. sum high_school
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ high_school |         51    85.43725    3.932987       77.1       91.8
+
+. gen literate == (high_school > 85)
+== invalid name
+r(198);
+
+. gen literate = (high_school > 85)
+
+. sum violent_crime_rate if literate ==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+violent_cr~e |         32    357.9063    171.3923         81        787
+
+. sum violent_crime_rate if literate == 0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+violent_cr~e |         19    582.6316    278.9829        295       1508
+
+. regress violent_crime_rate literate
+
+      Source |       SS           df       MS      Number of obs   =        51
+-------------+----------------------------------   F(1, 49)        =     12.76
+       Model |  602056.782         1  602056.782   Prob > F        =    0.0008
+    Residual |  2311601.14        49  47175.5335   R-squared       =    0.2066
+-------------+----------------------------------   Adj R-squared   =    0.1904
+       Total |  2913657.92        50  58273.1584   Root MSE        =     217.2
+
+------------------------------------------------------------------------------
+violent_cr~e |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    literate |  -224.7253   62.90595    -3.57   0.001    -351.1396   -98.31109
+       _cons |   582.6316   49.82894    11.69   0.000     482.4966    682.7666
+------------------------------------------------------------------------------
+
+. regress violent_crime_rate poverty single_parent unemployed
+
+      Source |       SS           df       MS      Number of obs   =        51
+-------------+----------------------------------   F(3, 47)        =     24.01
+       Model |  1763274.12         3  587758.041   Prob > F        =    0.0000
+    Residual |   1150383.8        47   24476.251   R-squared       =    0.6052
+-------------+----------------------------------   Adj R-squared   =    0.5800
+       Total |  2913657.92        50  58273.1584   Root MSE        =    156.45
+
+------------------------------------------------------------------------------
+violent_cr~e |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     poverty |  -2.684261   9.597977    -0.28   0.781     -21.9929    16.62438
+single_par~t |   41.30001   6.096157     6.77   0.000     29.03612    53.56389
+  unemployed |    31.9965   28.52134     1.12   0.268    -25.38104    89.37404
+       _cons |   -619.713   130.0673    -4.76   0.000    -881.3746   -358.0513
+------------------------------------------------------------------------------
+
+
+. cmdlog close
+(cmdlog /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6_3.do 
+> closed)
+
+. log close
+      name:  <unnamed>
+       log:  /Users/yushujiang/Desktop/ECO220/Labs/Problemset6/analysis/jiang_ps6_
+> 3.log
+  log type:  text
+ closed on:   4 Dec 2018, 15:43:55
+----------------------------------------------------------------------------------
